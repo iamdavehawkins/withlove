@@ -421,6 +421,182 @@
             color: var(--color-secondary);
         }
         
+        /* Lyrics Display */
+        .lyrics-player {
+            display: none;
+            padding: 12px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(232, 244, 248, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .lyrics-player.active {
+            display: block;
+        }
+        
+        .lyrics-scroll {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: transform 0.3s ease-out;
+        }
+        
+        .lyric-line {
+            font-family: 'Degular Text', Georgia, serif;
+            transition: all 0.3s ease-out;
+            max-width: 100%;
+            line-height: 1.3;
+            padding: 0 10px;
+        }
+        
+        .lyric-intro {
+            font-family: 'Vulf Mono', 'Courier New', monospace;
+            font-size: 0.7em;
+            font-style: italic;
+            color: var(--color-secondary);
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+        
+        .lyric-line.prev {
+            font-size: 0.8em;
+            color: var(--color-secondary);
+            opacity: 0.5;
+        }
+        
+        .lyric-line.current {
+            font-size: 1.05em;
+            color: var(--color-clinical);
+            opacity: 1;
+        }
+        
+        .lyric-line.next {
+            font-size: 0.8em;
+            color: var(--color-secondary);
+            opacity: 0.5;
+        }
+        
+        .lyric-line.hidden {
+            opacity: 0;
+            height: 0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Credits Link */
+        .credits-link {
+            font-family: 'Vulf Mono', 'Courier New', monospace;
+            font-size: 0.7em;
+            font-style: italic;
+            color: var(--color-secondary);
+            text-decoration: none;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: all 0.2s ease;
+            background: none;
+            border: none;
+            padding: 0;
+            margin-left: 10px;
+        }
+        
+        .credits-link:hover {
+            color: var(--color-accent);
+            opacity: 1;
+        }
+        
+        /* Credits Modal */
+        .credits-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .credits-modal.active {
+            display: flex;
+        }
+        
+        .credits-modal-content {
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-secondary);
+            border-radius: 8px;
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .credits-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: var(--color-secondary);
+            font-size: 1.5em;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            transition: color 0.2s ease;
+        }
+        
+        .credits-modal-close:hover {
+            color: var(--color-accent);
+        }
+        
+        .credits-modal h3 {
+            font-family: 'Compadre Extended', Georgia, serif;
+            font-size: 1.3em;
+            color: var(--color-paper);
+            margin: 0 0 16px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .credits-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .credits-list li {
+            font-family: 'Degular Text', Georgia, serif;
+            font-size: 0.95em;
+            color: var(--color-paper);
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(79, 106, 137, 0.2);
+        }
+        
+        .credits-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .credits-role {
+            font-family: 'Vulf Mono', 'Courier New', monospace;
+            font-size: 0.8em;
+            font-style: italic;
+            color: var(--color-secondary);
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .credits-name {
+            color: var(--color-accent);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .lyrics-scroll,
+            .lyric-line {
+                transition: none;
+            }
+        }
+        
         /* YouTube Video */
         .video-container {
             position: relative;
@@ -696,6 +872,7 @@
                     <div class="track-artist">Dave Hawkins</div>
                 </div>
                 <div class="track-duration" id="trackDuration">4:02</div>
+                <button class="credits-link" id="creditsLink">credits</button>
             </div>
             <div class="player-progress" id="playerProgress">
                 <div class="progress-container" id="progressContainer">
@@ -704,6 +881,13 @@
                 <div class="time-display">
                     <span id="currentTime">0:00</span>
                     <span id="totalTime">4:02</span>
+                </div>
+            </div>
+            <div class="lyrics-player" id="lyricsPlayer">
+                <div class="lyrics-scroll" id="lyricsScroll">
+                    <div class="lyric-line prev" id="lyricPrev"></div>
+                    <div class="lyric-line current" id="lyricCurrent"></div>
+                    <div class="lyric-line next" id="lyricNext"></div>
                 </div>
             </div>
         </div>
@@ -817,6 +1001,20 @@
         <p>&copy; <script>document.write(new Date().getFullYear());</script> Dave Hawkins | <a href="https://links.iamdavehawkins.com">iamdavehawkins.com</a></p>
     </footer>
 
+    <!-- Credits Modal -->
+    <div class="credits-modal" id="creditsModal">
+        <div class="credits-modal-content">
+            <button class="credits-modal-close" id="creditsModalClose" aria-label="Close">&times;</button>
+            <h3>With Love</h3>
+            <ul class="credits-list">
+                <li><span class="credits-role">Mixed by</span><span class="credits-name">Sean Kenney, Dad Mode Audio</span></li>
+                <li><span class="credits-role">Mastered by</span><span class="credits-name">Kevin Embleton</span></li>
+                <li><span class="credits-role">Drums</span><span class="credits-name">Derek Swink</span></li>
+                <li><span class="credits-role">Bass Guitar</span><span class="credits-name">Derek Swink</span></li>
+            </ul>
+        </div>
+    </div>
+
     <script>
         const audio = document.getElementById('audio');
         const playBtn = document.getElementById('playBtn');
@@ -825,11 +1023,99 @@
         const progressContainer = document.getElementById('progressContainer');
         const currentTimeEl = document.getElementById('currentTime');
         const totalTimeEl = document.getElementById('totalTime');
+        const lyricsPlayer = document.getElementById('lyricsPlayer');
+        const lyricPrev = document.getElementById('lyricPrev');
+        const lyricCurrent = document.getElementById('lyricCurrent');
+        const lyricNext = document.getElementById('lyricNext');
+        
+        // LRC lyrics data (embedded for performance)
+        const lyricsData = [
+            { time: 6.09, text: "Look at what she is wearing, your beautiful eyes" },
+            { time: 12.24, text: "Taste how a michelin star shines, the perfect night" },
+            { time: 18.28, text: "Don't worry wake up early exercise" },
+            { time: 29.97, text: "Listen to what we are saying, your beautiful ears" },
+            { time: 36.26, text: "The things around you are breaking, but don't be scared" },
+            { time: 42.13, text: "We have the things that you need, and we'll be there" },
+            { time: 58.65, text: "So just take your time" },
+            { time: 61.74, text: "We'll be right outside" },
+            { time: 64.70, text: "I will always wait for you" },
+            { time: 70.66, text: "See the colors shine" },
+            { time: 73.58, text: "Let it fill your mind" },
+            { time: 76.62, text: "Something sparkling something new" },
+            { time: 82.49, text: "Feel the touch of the fabric, your beautiful skin" },
+            { time: 88.66, text: "Atomic purified air, please breathe deeply my friend" },
+            { time: 94.62, text: "No hesitation the cleansing now begins" },
+            { time: 106.64, text: "You feel the nutrients working, your beautiful blood" },
+            { time: 112.51, text: "A custom treatment for you, calculated with love" },
+            { time: 118.67, text: "We guarantee, your youth will be restored" },
+            { time: 134.99, text: "So just take your time" },
+            { time: 138.19, text: "We'll be right outside" },
+            { time: 141.29, text: "I will always wait for you" },
+            { time: 147.12, text: "See the colors shine" },
+            { time: 150.13, text: "Let it fill your mind" },
+            { time: 153.29, text: "Something sparkling something new" }
+        ];
+        
+        let currentLyricIndex = -1;
         
         function formatTime(seconds) {
             const mins = Math.floor(seconds / 60);
             const secs = Math.floor(seconds % 60);
             return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        function getCurrentLyricIndex(time) {
+            for (let i = lyricsData.length - 1; i >= 0; i--) {
+                if (time >= lyricsData[i].time) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        
+        const songTitle = "With Love";
+        const artistName = "Dave Hawkins";
+        
+        function updateLyrics(time) {
+            const newIndex = getCurrentLyricIndex(time);
+            
+            if (newIndex !== currentLyricIndex) {
+                currentLyricIndex = newIndex;
+                
+                // Update prev line
+                if (currentLyricIndex > 0) {
+                    lyricPrev.textContent = lyricsData[currentLyricIndex - 1].text;
+                    lyricPrev.classList.remove('hidden', 'lyric-intro');
+                } else if (currentLyricIndex === 0) {
+                    lyricPrev.textContent = `${songTitle} — ${artistName} — Lyrics`;
+                    lyricPrev.classList.remove('hidden');
+                    lyricPrev.classList.add('lyric-intro');
+                } else {
+                    lyricPrev.textContent = '';
+                    lyricPrev.classList.add('hidden');
+                }
+                
+                // Update current line
+                if (currentLyricIndex >= 0) {
+                    lyricCurrent.textContent = lyricsData[currentLyricIndex].text;
+                    lyricCurrent.classList.remove('lyric-intro');
+                } else {
+                    lyricCurrent.textContent = `${songTitle} — ${artistName} — Lyrics`;
+                    lyricCurrent.classList.add('lyric-intro');
+                }
+                
+                // Update next line
+                if (currentLyricIndex < lyricsData.length - 1 && currentLyricIndex >= 0) {
+                    lyricNext.textContent = lyricsData[currentLyricIndex + 1].text;
+                    lyricNext.classList.remove('hidden');
+                } else if (currentLyricIndex === -1 && lyricsData.length > 0) {
+                    lyricNext.textContent = lyricsData[0].text;
+                    lyricNext.classList.remove('hidden');
+                } else {
+                    lyricNext.textContent = '';
+                    lyricNext.classList.add('hidden');
+                }
+            }
         }
         
         function updateProgress() {
@@ -838,6 +1124,7 @@
                 progressBar.style.width = percent + '%';
                 currentTimeEl.textContent = formatTime(audio.currentTime);
                 totalTimeEl.textContent = formatTime(audio.duration);
+                updateLyrics(audio.currentTime);
             }
         }
         
@@ -846,6 +1133,9 @@
                 audio.play();
                 playBtn.classList.add('playing');
                 playerProgress.classList.add('active');
+                lyricsPlayer.classList.add('active');
+                currentLyricIndex = -2; // Reset to force update
+                updateLyrics(audio.currentTime);
             } else {
                 audio.pause();
                 playBtn.classList.remove('playing');
@@ -869,8 +1159,29 @@
         audio.addEventListener('ended', () => {
             playBtn.classList.remove('playing');
             playerProgress.classList.remove('active');
+            lyricsPlayer.classList.remove('active');
             progressBar.style.width = '0%';
             currentTimeEl.textContent = '0:00';
+            currentLyricIndex = -1;
+        });
+        
+        // Credits Modal
+        const creditsLink = document.getElementById('creditsLink');
+        const creditsModal = document.getElementById('creditsModal');
+        const creditsModalClose = document.getElementById('creditsModalClose');
+        
+        creditsLink.addEventListener('click', () => {
+            creditsModal.classList.add('active');
+        });
+        
+        creditsModalClose.addEventListener('click', () => {
+            creditsModal.classList.remove('active');
+        });
+        
+        creditsModal.addEventListener('click', (e) => {
+            if (e.target === creditsModal) {
+                creditsModal.classList.remove('active');
+            }
         });
     </script>
 </body>
