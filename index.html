@@ -25,1164 +25,224 @@
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://withlove.iamdavehawkins.com/">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="99efd3af-3c2e-490e-adc0-aa7a12c5f68a"></script>
     
     <link rel="icon" href="With Love - Album Cover.png" type="image/png">
-    <style>
-        /* CSS Variables for Brand Colors */
-        :root {
-            --color-primary: #9B4A34;     /* Muted terracotta / rust red */
-            --color-secondary: #4F6A89;   /* Washed-out denim blue */
-            --color-accent: #D8A34A;      /* Mustard yellow */
-            --color-paper: #F4F0E6;       /* Off-white paper */
-            --color-charcoal: #222222;    /* Charcoal black */
-            --color-clinical: #E8F4F8;    /* Sterile blue-white for "treatment" aesthetic */
-        }
-        
-        /* Custom Font Declarations */
-        @font-face {
-            font-family: 'Degular Text';
-            src: url('../fonts/DegularText-Regular.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/DegularText-Regular.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        
-        @font-face {
-            font-family: 'Compadre Extended';
-            src: url('../fonts/Compadre-Extended.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/Compadre-Extended.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        
-        @font-face {
-            font-family: 'Vulf Mono';
-            src: url('../fonts/Vulf_Mono-Light_Italic_web.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/Vulf_Mono-Light_Italic_web.woff2') format('woff2');
-            font-weight: 300;
-            font-style: italic;
-            font-display: swap;
-        }
-        
-        @font-face {
-            font-family: 'Coniferous';
-            src: url('../fonts/Coniferous-Regular.woff2') format('woff2'),
-                 url('https://cdn.iamdavehawkins.com/Coniferous-Regular.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
-        
-        * {
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Degular Text', Georgia, serif;
-            background-color: var(--color-charcoal);
-            color: var(--color-paper);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        /* Hero Section */
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 30px 0;
-            position: relative;
-        }
-        
-        /* Clinical "sterile" accent lines */
-        header::before,
-        header::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--color-clinical) 50%, 
-                transparent 100%);
-            opacity: 0.3;
-        }
-        
-        header::before {
-            top: 0;
-        }
-        
-        header::after {
-            bottom: 0;
-        }
-        
-        .album-art-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        
-        .album-art {
-            width: 350px;
-            height: 350px;
-            border-radius: 4px;
-            box-shadow: 
-                0 0 0 1px var(--color-paper),
-                0 0 0 2px var(--color-charcoal),
-                0 0 0 3px rgba(232, 244, 248, 0.3),
-                0 8px 24px rgba(0, 0, 0, 0.5);
-            display: block;
-        }
-        
-        /* Subtle pulse animation for clinical feel */
-        @keyframes clinicalPulse {
-            0%, 100% { opacity: 0.15; }
-            50% { opacity: 0.35; }
-        }
-        
-        .album-art-container::after {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 4px;
-            border: 1px solid var(--color-clinical);
-            opacity: 0.15;
-            animation: clinicalPulse 4s ease-in-out infinite;
-            pointer-events: none;
-        }
-        
-        h1 {
-            font-family: 'Compadre Extended', Georgia, serif;
-            font-size: 4em;
-            margin: 10px 0;
-            letter-spacing: 3px;
-            color: var(--color-paper);
-            text-transform: uppercase;
-        }
-        
-        .subtitle {
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 1.2em;
-            color: var(--color-secondary);
-            font-weight: normal;
-            letter-spacing: 0.5px;
-            margin-bottom: 10px;
-        }
-        
-        .treatment-label {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.75em;
-            color: var(--color-clinical);
-            font-style: italic;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.7;
-            margin-top: 5px;
-        }
-        
-        /* Section Styles */
-        .section {
-            margin: 20px 0;
-            padding: 20px;
-            background: rgba(79, 106, 137, 0.08);
-            border: 1px solid var(--color-secondary);
-            border-radius: 8px;
-            position: relative;
-        }
-        
-        .section h2 {
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 1.5em;
-            color: var(--color-accent);
-            border-bottom: 1px solid rgba(216, 163, 74, 0.3);
-            padding-bottom: 8px;
-            margin: 0 0 15px 0;
-            letter-spacing: 0.5px;
-            text-transform: lowercase;
-        }
-        
-        /* Streaming Links */
-        .stream-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-            margin-top: 15px;
-        }
-        
-        .stream-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 10px;
-            background: var(--color-primary);
-            color: var(--color-paper);
-            text-decoration: none;
-            border-radius: 6px;
-            border: 1px solid var(--color-charcoal);
-            transition: all 0.3s ease;
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 0.9em;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            min-height: 90px;
-        }
-        
-        .stream-link:hover {
-            background: var(--color-accent);
-            color: var(--color-charcoal);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(216, 163, 74, 0.3);
-        }
-        
-        .stream-link:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-        
-        .stream-link svg {
-            width: 32px;
-            height: 32px;
-            fill: currentColor;
-            margin-bottom: 8px;
-        }
-        
-        .stream-link.available {
-            background: var(--color-primary);
-        }
-        
-        .stream-link.coming-soon {
-            background: rgba(79, 106, 137, 0.4);
-            cursor: default;
-            opacity: 0.6;
-        }
-        
-        .stream-link.coming-soon:hover {
-            transform: none;
-            box-shadow: none;
-            background: rgba(79, 106, 137, 0.4);
-            color: var(--color-paper);
-        }
-        
-        .stream-label {
-            font-size: 0.75em;
-            opacity: 0.8;
-            margin-top: 4px;
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-style: italic;
-        }
-        
-        /* Custom Audio Player */
-        .audio-player {
-            margin: 20px 0;
-            background: rgba(79, 106, 137, 0.15);
-            border: 1px solid var(--color-secondary);
-            border-radius: 8px;
-            position: relative;
-        }
-        
-        .audio-player::before,
-        .audio-player::after {
-            content: '';
-            position: absolute;
-            height: 1px;
-            left: 20px;
-            right: 20px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--color-clinical) 50%, 
-                transparent 100%);
-            opacity: 0.3;
-        }
-        
-        .audio-player::before { top: 0; }
-        .audio-player::after { bottom: 0; }
-        
-        .player-main {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px 20px;
-        }
-        
-        .play-btn {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background: var(--color-primary);
-            border: 2px solid var(--color-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
-        }
-        
-        .play-btn:hover {
-            background: var(--color-accent);
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(216, 163, 74, 0.3);
-        }
-        
-        .play-btn:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-        
-        .play-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: var(--color-paper);
-        }
-        
-        .play-btn:hover svg {
-            fill: var(--color-charcoal);
-        }
-        
-        .play-btn .icon-pause {
-            display: none;
-        }
-        
-        .play-btn.playing .icon-play {
-            display: none;
-        }
-        
-        .play-btn.playing .icon-pause {
-            display: block;
-        }
-        
-        .track-info {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .track-title {
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 1.1em;
-            color: var(--color-paper);
-            margin-bottom: 2px;
-        }
-        
-        .track-artist {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.75em;
-            font-style: italic;
-            color: var(--color-secondary);
-        }
-        
-        .track-duration {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.8em;
-            font-style: italic;
-            color: var(--color-accent);
-            flex-shrink: 0;
-        }
-        
-        /* Progress Section */
-        .player-progress {
-            display: none;
-            padding: 0 20px 15px;
-        }
-        
-        .player-progress.active {
-            display: block;
-        }
-        
-        .progress-container {
-            width: 100%;
-            height: 6px;
-            background: rgba(79, 106, 137, 0.3);
-            border-radius: 3px;
-            cursor: pointer;
-            margin-bottom: 8px;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: var(--color-clinical);
-            border-radius: 3px;
-            width: 0%;
-            transition: width 0.1s linear;
-        }
-        
-        .time-display {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.7em;
-            font-style: italic;
-            color: var(--color-secondary);
-        }
-        
-        /* Lyrics Display */
-        .lyrics-player {
-            display: none;
-            padding: 12px 20px;
-            text-align: center;
-            border-top: 1px solid rgba(232, 244, 248, 0.1);
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .lyrics-player.active {
-            display: block;
-        }
-        
-        .lyrics-scroll {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            transition: transform 0.3s ease-out;
-        }
-        
-        .lyric-line {
-            font-family: 'Degular Text', Georgia, serif;
-            transition: all 0.3s ease-out;
-            max-width: 100%;
-            line-height: 1.3;
-            padding: 0 10px;
-        }
-        
-        .lyric-intro {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.7em;
-            font-style: italic;
-            color: var(--color-secondary);
-            letter-spacing: 0.5px;
-            opacity: 0.8;
-        }
-        
-        .lyric-line.prev {
-            font-size: 0.8em;
-            color: var(--color-secondary);
-            opacity: 0.5;
-        }
-        
-        .lyric-line.current {
-            font-size: 1.05em;
-            color: var(--color-clinical);
-            opacity: 1;
-        }
-        
-        .lyric-line.next {
-            font-size: 0.8em;
-            color: var(--color-secondary);
-            opacity: 0.5;
-        }
-        
-        .lyric-line.hidden {
-            opacity: 0;
-            height: 0;
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* Credits Link */
-        .credits-link {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.7em;
-            font-style: italic;
-            color: var(--color-secondary);
-            text-decoration: none;
-            cursor: pointer;
-            opacity: 0.8;
-            transition: all 0.2s ease;
-            background: none;
-            border: none;
-            padding: 0;
-            margin-left: 10px;
-        }
-        
-        .credits-link:hover {
-            color: var(--color-accent);
-            opacity: 1;
-        }
-        
-        /* Credits Modal */
-        .credits-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .credits-modal.active {
-            display: flex;
-        }
-        
-        .credits-modal-content {
-            background: var(--color-charcoal);
-            border: 1px solid var(--color-secondary);
-            border-radius: 8px;
-            padding: 24px;
-            max-width: 400px;
-            width: 100%;
-            position: relative;
-        }
-        
-        .credits-modal-close {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: none;
-            border: none;
-            color: var(--color-secondary);
-            font-size: 1.5em;
-            cursor: pointer;
-            line-height: 1;
-            padding: 0;
-            transition: color 0.2s ease;
-        }
-        
-        .credits-modal-close:hover {
-            color: var(--color-accent);
-        }
-        
-        .credits-modal h3 {
-            font-family: 'Compadre Extended', Georgia, serif;
-            font-size: 1.3em;
-            color: var(--color-paper);
-            margin: 0 0 16px 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .credits-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .credits-list li {
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 0.95em;
-            color: var(--color-paper);
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(79, 106, 137, 0.2);
-        }
-        
-        .credits-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .credits-role {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.8em;
-            font-style: italic;
-            color: var(--color-secondary);
-            display: block;
-            margin-bottom: 2px;
-        }
-        
-        .credits-name {
-            color: var(--color-accent);
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            .lyrics-scroll,
-            .lyric-line {
-                transition: none;
-            }
-        }
-        
-        /* YouTube Video */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            border: 1px solid var(--color-secondary);
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-        }
-        
-        .video-placeholder {
-            padding: 60px 20px;
-            text-align: center;
-            background: rgba(79, 106, 137, 0.15);
-            border-radius: 8px;
-            border: 1px dashed var(--color-secondary);
-        }
-        
-        .video-placeholder svg {
-            width: 64px;
-            height: 64px;
-            fill: var(--color-secondary);
-            opacity: 0.5;
-            margin-bottom: 15px;
-        }
-        
-        .video-placeholder p {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.9em;
-            color: var(--color-secondary);
-            font-style: italic;
-            margin: 0;
-        }
-        
-        /* Lyrics Section - Clinical/Spa aesthetic */
-        .lyrics-section {
-            background: linear-gradient(135deg, 
-                rgba(232, 244, 248, 0.03) 0%, 
-                rgba(79, 106, 137, 0.08) 100%);
-            border: 1px solid rgba(232, 244, 248, 0.2);
-        }
-        
-        .lyrics-content {
-            font-family: 'Degular Text', Georgia, serif;
-            font-size: 1.05em;
-            line-height: 1.9;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .lyrics-verse {
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-left: 2px solid var(--color-clinical);
-            border-radius: 4px;
-            opacity: 0.9;
-        }
-        
-        .lyrics-chorus {
-            font-family: 'Coniferous', Georgia, serif;
-            font-size: 1.15em;
-            font-style: italic;
-            color: var(--color-clinical);
-            margin: 25px 0;
-            padding: 20px;
-            background: rgba(232, 244, 248, 0.05);
-            border: 1px solid rgba(232, 244, 248, 0.2);
-            border-radius: 6px;
-        }
-        
-        /* Newsletter Section */
-        .newsletter {
-            background: var(--color-secondary);
-            border: 1px solid var(--color-primary);
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .newsletter h3 {
-            font-family: 'Degular Text', Georgia, serif;
-            color: var(--color-paper);
-            margin: 0 0 10px 0;
-            font-size: 1.2em;
-            letter-spacing: 0.5px;
-        }
-        
-        .newsletter p {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.85em;
-            color: var(--color-paper);
-            opacity: 0.9;
-            margin: 0 0 15px 0;
-            font-style: italic;
-        }
-        
-        .form-group {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .newsletter input[type="email"] {
-            padding: 12px 15px;
-            border: 1px solid var(--color-primary);
-            border-radius: 5px;
-            font-size: 16px;
-            min-width: 250px;
-            font-family: 'Degular Text', Georgia, serif;
-            background: var(--color-paper);
-            color: var(--color-charcoal);
-        }
-        
-        .newsletter input[type="email"]:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 1px;
-        }
-        
-        .newsletter input[type="submit"] {
-            padding: 12px 24px;
-            background: var(--color-primary);
-            color: var(--color-paper);
-            border: 1px solid var(--color-charcoal);
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: 'Degular Text', Georgia, serif;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-        }
-        
-        .newsletter input[type="submit"]:hover {
-            background: var(--color-accent);
-            color: var(--color-charcoal);
-        }
-        
-        .newsletter input[type="submit"]:focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 2px;
-        }
-        
-        /* Footer */
-        footer {
-            font-family: 'Vulf Mono', 'Courier New', monospace;
-            font-size: 0.85em;
-            font-weight: 300;
-            font-style: italic;
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px 0;
-            border-top: 1px solid var(--color-secondary);
-            color: var(--color-accent);
-        }
-        
-        footer a {
-            color: var(--color-accent);
-            text-decoration: none;
-        }
-        
-        footer a:hover {
-            color: var(--color-paper);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 3em;
-                letter-spacing: 2px;
-            }
-            
-            .album-art {
-                width: 280px;
-                height: 280px;
-            }
-            
-            .stream-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: 10px;
-            }
-            
-            .stream-link {
-                padding: 14px 8px;
-                min-height: 85px;
-                font-size: 0.85em;
-            }
-            
-            .stream-link svg {
-                width: 28px;
-                height: 28px;
-            }
-            
-            .section {
-                padding: 15px;
-            }
-            
-            .lyrics-content {
-                font-size: 1em;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2.5em;
-                letter-spacing: 1px;
-            }
-            
-            .album-art {
-                width: 240px;
-                height: 240px;
-            }
-            
-            .stream-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .form-group {
-                flex-direction: column;
-                gap: 12px;
-            }
-            
-            .newsletter input[type="email"] {
-                min-width: 100%;
-            }
-            
-            .newsletter input[type="submit"] {
-                width: 100%;
-            }
-        }
-    </style>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="99efd3af-3c2e-490e-adc0-aa7a12c5f68a"></script>
 </head>
 <body>
-    <header>
-        <div class="album-art-container">
-            <img src="With Love - Album Cover.png" alt="With Love Album Art" class="album-art">
-        </div>
-        <h1>With Love</h1>
-        <p class="subtitle">Dave Hawkins</p>
-        <p class="treatment-label">calculated with love</p>
-    </header>
 
-    <div class="section">
-        <h2>listen now</h2>
-        <div class="audio-player" id="audioPlayer">
-            <div class="player-main">
-                <button class="play-btn" id="playBtn" aria-label="Play With Love">
-                    <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
-                    </svg>
-                    <svg class="icon-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                    </svg>
-                </button>
-                <div class="track-info">
-                    <div class="track-title">With Love</div>
-                    <div class="track-artist">Dave Hawkins</div>
-                </div>
-                <div class="track-duration" id="trackDuration">4:02</div>
-                <button class="credits-link" id="creditsLink">credits</button>
-            </div>
-            <div class="player-progress" id="playerProgress">
-                <div class="progress-container" id="progressContainer">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-                <div class="time-display">
-                    <span id="currentTime">0:00</span>
-                    <span id="totalTime">4:02</span>
-                </div>
-            </div>
-            <div class="lyrics-player" id="lyricsPlayer">
-                <div class="lyrics-scroll" id="lyricsScroll">
-                    <div class="lyric-line prev" id="lyricPrev"></div>
-                    <div class="lyric-line current" id="lyricCurrent"></div>
-                    <div class="lyric-line next" id="lyricNext"></div>
-                </div>
-            </div>
-        </div>
-        <audio id="audio" preload="metadata">
-            <source src="01 With Love.wav" type="audio/wav">
-        </audio>
-    </div>
+<p><a href="https://halfaliveep.iamdavehawkins.com">[from the Half Alive EP]</a></p>
 
-    <div class="section">
-        <h2>stream or buy on bandcamp</h2>
-        <div class="stream-grid">
-            <a href="https://iamdavehawkins.bandcamp.com/track/with-love" class="stream-link available" target="_blank" rel="noopener" title="Bandcamp">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M0 18.75l7.437-13.5H24l-7.438 13.5H0z"/>
-                </svg>
-                Bandcamp
-            </a>
-        </div>
-    </div>
+<h1>With Love</h1>
+<p><b>Dave Hawkins</b> - Denver, CO</p>
+<p><i>a custom treatment for you, calculated with love</i></p>
 
-    <div class="section">
-        <h2>stream from billionaires</h2>
-        <div class="stream-grid">
-            <a href="https://open.spotify.com/track/73jKsH5POe9KbizwUWvz8V" class="stream-link available" target="_blank" rel="noopener" title="Spotify">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
-                    <path d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm100.7 364.9c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 30.6 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4zm26.9-65.6c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm31-76.2c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3z"/>
-                </svg>
-                Spotify
-            </a>
-            <a href="https://music.apple.com/us/album/with-love-single/1846230728" class="stream-link available" target="_blank" rel="noopener" title="Apple Music">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-                </svg>
-                Apple Music
-            </a>
-            <a href="https://youtu.be/83h_W4lp4x8" class="stream-link available" target="_blank" rel="noopener" title="YouTube Music">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                    <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/>
-                </svg>
-                YouTube Music
-            </a>
-        </div>
-    </div>
+<img src="With Love - Album Cover.png" alt="With Love Single Art" width="150">
 
-    <div class="section">
-        <h2>music video</h2>
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/aEHIni3-naY" title="With Love - Dave Hawkins (Official Music Video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-    </div>
+<hr>
 
-    <div class="section newsletter">
-        <form
-          action="https://buttondown.com/api/emails/embed-subscribe/iamdavehawkins"
-          method="post"
-          target="popupwindow"
-          onsubmit="window.open('https://buttondown.com/iamdavehawkins', 'popupwindow')"
-          class="embeddable-buttondown-form"
-        >
-            <h3>email list</h3>
-            <p>get notified of new releases + occasional musings</p>
-            <div class="form-group">
-                <input type="email" name="email" id="bd-email" placeholder="your@email.com" required />
-                <input type="hidden" value="1" name="embed" />
-                <input type="submit" value="Subscribe" />
-            </div>
-        </form>
-    </div>
+<h2>Listen + Download (free)</h2>
 
-    <div class="section lyrics-section">
-        <h2>from the song</h2>
-        <div class="lyrics-content">
-            <div class="lyrics-verse">
-                look at what she is wearing, your beautiful eyes<br>
-                taste how a michelin star shines, the perfect night<br>
-                don't worry wake up early exercise
-            </div>
-            
-            <div class="lyrics-verse">
-                listen to what we are saying, your beautiful ears<br>
-                the things around you are breaking, but don't be scared<br>
-                We have the things that you need, and we'll be there
-            </div>
-            
-            <div class="lyrics-chorus">
-                so just take your time<br>
-                we'll be right outside<br>
-                I will always wait for you<br>
-                <br>
-                see the colors shine<br>
-                let it fill your mind<br>
-                something sparkling something new
-            </div>
-            
-            <div class="lyrics-verse">
-                feel the touch of the fabric, your beautiful skin<br>
-                atomic purified air, please breathe deeply my friend<br>
-                no hesitation the cleansing now begins
-            </div>
-            
-            <div class="lyrics-verse">
-                you feel the nutrients working, your beautiful blood<br>
-                a custom treatment for you, calculated with love<br>
-                we guarantee, your youth will be restored
-            </div>
-        </div>
-    </div>
+<p>
+    <button onclick="toggleAudio()">&#9658; Play</button>
+    <a href="01 With Love.wav" download>[Download WAV]</a>
+    <button onclick="showCredits()">[Credits]</button>
+</p>
 
+<audio id="audio" controls>
+    <source src="01 With Love.wav" type="audio/wav">
+    Your browser does not support the audio element.
+</audio>
 
-    <footer>
-        <p>&copy; <script>document.write(new Date().getFullYear());</script> Dave Hawkins | <a href="https://links.iamdavehawkins.com">iamdavehawkins.com</a></p>
-    </footer>
+<div id="nowPlaying" style="display:none;">
+    <p><b>Now Playing:</b> With Love | <span id="currentTime">0:00</span> / <span id="totalTime">4:02</span></p>
+    <blockquote><i id="lyricsDisplay">[ lyrics coming... ]</i></blockquote>
+</div>
 
-    <!-- Credits Modal -->
-    <div class="credits-modal" id="creditsModal">
-        <div class="credits-modal-content">
-            <button class="credits-modal-close" id="creditsModalClose" aria-label="Close">&times;</button>
-            <h3>With Love</h3>
-            <ul class="credits-list">
-                <li><span class="credits-role">Mixed by</span><span class="credits-name">Sean Kenney, Dad Mode Audio</span></li>
-                <li><span class="credits-role">Mastered by</span><span class="credits-name">Kevin Embleton</span></li>
-                <li><span class="credits-role">Drums</span><span class="credits-name">Derek Swink</span></li>
-                <li><span class="credits-role">Bass Guitar</span><span class="credits-name">Derek Swink</span></li>
-            </ul>
-        </div>
-    </div>
+<hr>
 
-    <script>
-        const audio = document.getElementById('audio');
-        const playBtn = document.getElementById('playBtn');
-        const playerProgress = document.getElementById('playerProgress');
-        const progressBar = document.getElementById('progressBar');
-        const progressContainer = document.getElementById('progressContainer');
-        const currentTimeEl = document.getElementById('currentTime');
-        const totalTimeEl = document.getElementById('totalTime');
-        const lyricsPlayer = document.getElementById('lyricsPlayer');
-        const lyricPrev = document.getElementById('lyricPrev');
-        const lyricCurrent = document.getElementById('lyricCurrent');
-        const lyricNext = document.getElementById('lyricNext');
-        
-        // LRC lyrics data (embedded for performance)
-        const lyricsData = [
-            { time: 6.09, text: "Look at what she is wearing, your beautiful eyes" },
-            { time: 12.24, text: "Taste how a michelin star shines, the perfect night" },
-            { time: 18.28, text: "Don't worry wake up early exercise" },
-            { time: 29.97, text: "Listen to what we are saying, your beautiful ears" },
-            { time: 36.26, text: "The things around you are breaking, but don't be scared" },
-            { time: 42.13, text: "We have the things that you need, and we'll be there" },
-            { time: 58.65, text: "So just take your time" },
-            { time: 61.74, text: "We'll be right outside" },
-            { time: 64.70, text: "I will always wait for you" },
-            { time: 70.66, text: "See the colors shine" },
-            { time: 73.58, text: "Let it fill your mind" },
-            { time: 76.62, text: "Something sparkling something new" },
-            { time: 82.49, text: "Feel the touch of the fabric, your beautiful skin" },
-            { time: 88.66, text: "Atomic purified air, please breathe deeply my friend" },
-            { time: 94.62, text: "No hesitation the cleansing now begins" },
-            { time: 106.64, text: "You feel the nutrients working, your beautiful blood" },
-            { time: 112.51, text: "A custom treatment for you, calculated with love" },
-            { time: 118.67, text: "We guarantee, your youth will be restored" },
-            { time: 134.99, text: "So just take your time" },
-            { time: 138.19, text: "We'll be right outside" },
-            { time: 141.29, text: "I will always wait for you" },
-            { time: 147.12, text: "See the colors shine" },
-            { time: 150.13, text: "Let it fill your mind" },
-            { time: 153.29, text: "Something sparkling something new" }
-        ];
-        
-        let currentLyricIndex = -1;
-        
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
+<h2>Music Video</h2>
+<p><a href="https://youtu.be/aEHIni3-naY" target="_blank" rel="noopener">Watch on YouTube</a></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aEHIni3-naY" title="With Love - Dave Hawkins (Official Music Video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<hr>
+
+<h2>Newsletter</h2>
+<form action="https://buttondown.com/api/emails/embed-subscribe/iamdavehawkins" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.com/iamdavehawkins', 'popupwindow')">
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" placeholder="your@email.com">
+    <input type="submit" value="Subscribe">
+    <input type="hidden" value="1" name="embed">
+    <br><small>get notified of new releases + connect off social media</small>
+</form>
+
+<hr>
+
+<h2>Stream</h2>
+
+<h3>Bandcamp (recommended)</h3>
+<ul>
+    <li><a href="https://iamdavehawkins.bandcamp.com/track/with-love" target="_blank" rel="noopener">Bandcamp</a> - buy and/or stream</li>
+</ul>
+
+<h3>Stream from a Billionaire</h3>
+<ul>
+    <li><a href="https://open.spotify.com/track/73jKsH5POe9KbizwUWvz8V" target="_blank" rel="noopener">Spotify</a></li>
+    <li><a href="https://music.apple.com/us/album/with-love-single/1846230728" target="_blank" rel="noopener">Apple Music</a></li>
+    <li><a href="https://youtu.be/83h_W4lp4x8" target="_blank" rel="noopener">YouTube Music</a></li>
+</ul>
+
+<hr>
+
+<h2>Lyrics</h2>
+
+<p>
+look at what she is wearing, your beautiful eyes<br>
+taste how a michelin star shines, the perfect night<br>
+don't worry wake up early exercise
+</p>
+
+<p>
+listen to what we are saying, your beautiful ears<br>
+the things around you are breaking, but don't be scared<br>
+we have the things that you need, and we'll be there
+</p>
+
+<blockquote>
+<i>
+so just take your time<br>
+we'll be right outside<br>
+i will always wait for you<br>
+<br>
+see the colors shine<br>
+let it fill your mind<br>
+something sparkling something new
+</i>
+</blockquote>
+
+<p>
+feel the touch of the fabric, your beautiful skin<br>
+atomic purified air, please breathe deeply my friend<br>
+no hesitation the cleansing now begins
+</p>
+
+<p>
+you feel the nutrients working, your beautiful blood<br>
+a custom treatment for you, calculated with love<br>
+we guarantee, your youth will be restored
+</p>
+
+<hr>
+
+<h2>Credits</h2>
+<ul>
+    <li><b>Mixed by:</b> Sean Kenney, Dad Mode Audio</li>
+    <li><b>Mastered by:</b> Kevin Embleton</li>
+    <li><b>Drums:</b> Derek Swink</li>
+    <li><b>Bass Guitar:</b> Derek Swink</li>
+</ul>
+
+<hr>
+
+<p>
+&copy; 2026 Dave Hawkins | <a href="https://links.iamdavehawkins.com" target="_blank" rel="noopener">iamdavehawkins.com</a>
+</p>
+
+<script>
+const audio = document.getElementById('audio');
+const nowPlaying = document.getElementById('nowPlaying');
+const lyricsDisplay = document.getElementById('lyricsDisplay');
+const currentTimeEl = document.getElementById('currentTime');
+const totalTimeEl = document.getElementById('totalTime');
+let currentLyricIndex = -1;
+
+const lyricsData = [
+    { time: 6.09, text: "Look at what she is wearing, your beautiful eyes" },
+    { time: 12.24, text: "Taste how a michelin star shines, the perfect night" },
+    { time: 18.28, text: "Don't worry wake up early exercise" },
+    { time: 29.97, text: "Listen to what we are saying, your beautiful ears" },
+    { time: 36.26, text: "The things around you are breaking, but don't be scared" },
+    { time: 42.13, text: "We have the things that you need, and we'll be there" },
+    { time: 58.65, text: "So just take your time" },
+    { time: 61.74, text: "We'll be right outside" },
+    { time: 64.70, text: "I will always wait for you" },
+    { time: 70.66, text: "See the colors shine" },
+    { time: 73.58, text: "Let it fill your mind" },
+    { time: 76.62, text: "Something sparkling something new" },
+    { time: 82.49, text: "Feel the touch of the fabric, your beautiful skin" },
+    { time: 88.66, text: "Atomic purified air, please breathe deeply my friend" },
+    { time: 94.62, text: "No hesitation the cleansing now begins" },
+    { time: 106.64, text: "You feel the nutrients working, your beautiful blood" },
+    { time: 112.51, text: "A custom treatment for you, calculated with love" },
+    { time: 118.67, text: "We guarantee, your youth will be restored" },
+    { time: 134.99, text: "So just take your time" },
+    { time: 138.19, text: "We'll be right outside" },
+    { time: 141.29, text: "I will always wait for you" },
+    { time: 147.12, text: "See the colors shine" },
+    { time: 150.13, text: "Let it fill your mind" },
+    { time: 153.29, text: "Something sparkling something new" }
+];
+
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return mins + ':' + secs.toString().padStart(2, '0');
+}
+
+function getCurrentLyricIndex(time) {
+    for (let i = lyricsData.length - 1; i >= 0; i--) {
+        if (time >= lyricsData[i].time) {
+            return i;
         }
-        
-        function getCurrentLyricIndex(time) {
-            for (let i = lyricsData.length - 1; i >= 0; i--) {
-                if (time >= lyricsData[i].time) {
-                    return i;
-                }
-            }
-            return -1;
-        }
-        
-        const songTitle = "With Love";
-        const artistName = "Dave Hawkins";
-        
-        function updateLyrics(time) {
-            const newIndex = getCurrentLyricIndex(time);
-            
-            if (newIndex !== currentLyricIndex) {
-                currentLyricIndex = newIndex;
-                
-                // Update prev line
-                if (currentLyricIndex > 0) {
-                    lyricPrev.textContent = lyricsData[currentLyricIndex - 1].text;
-                    lyricPrev.classList.remove('hidden', 'lyric-intro');
-                } else if (currentLyricIndex === 0) {
-                    lyricPrev.textContent = `${songTitle} — ${artistName} — Lyrics`;
-                    lyricPrev.classList.remove('hidden');
-                    lyricPrev.classList.add('lyric-intro');
-                } else {
-                    lyricPrev.textContent = '';
-                    lyricPrev.classList.add('hidden');
-                }
-                
-                // Update current line
-                if (currentLyricIndex >= 0) {
-                    lyricCurrent.textContent = lyricsData[currentLyricIndex].text;
-                    lyricCurrent.classList.remove('lyric-intro');
-                } else {
-                    lyricCurrent.textContent = `${songTitle} — ${artistName} — Lyrics`;
-                    lyricCurrent.classList.add('lyric-intro');
-                }
-                
-                // Update next line
-                if (currentLyricIndex < lyricsData.length - 1 && currentLyricIndex >= 0) {
-                    lyricNext.textContent = lyricsData[currentLyricIndex + 1].text;
-                    lyricNext.classList.remove('hidden');
-                } else if (currentLyricIndex === -1 && lyricsData.length > 0) {
-                    lyricNext.textContent = lyricsData[0].text;
-                    lyricNext.classList.remove('hidden');
-                } else {
-                    lyricNext.textContent = '';
-                    lyricNext.classList.add('hidden');
-                }
-            }
-        }
-        
-        function updateProgress() {
-            if (audio.duration) {
-                const percent = (audio.currentTime / audio.duration) * 100;
-                progressBar.style.width = percent + '%';
-                currentTimeEl.textContent = formatTime(audio.currentTime);
-                totalTimeEl.textContent = formatTime(audio.duration);
-                updateLyrics(audio.currentTime);
-            }
-        }
-        
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                playBtn.classList.add('playing');
-                playerProgress.classList.add('active');
-                lyricsPlayer.classList.add('active');
-                currentLyricIndex = -2; // Reset to force update
-                updateLyrics(audio.currentTime);
-            } else {
-                audio.pause();
-                playBtn.classList.remove('playing');
-            }
-        });
-        
-        progressContainer.addEventListener('click', (e) => {
-            if (audio.duration) {
-                const rect = progressContainer.getBoundingClientRect();
-                const percent = (e.clientX - rect.left) / rect.width;
-                audio.currentTime = percent * audio.duration;
-            }
-        });
-        
-        audio.addEventListener('timeupdate', updateProgress);
-        
-        audio.addEventListener('loadedmetadata', () => {
-            totalTimeEl.textContent = formatTime(audio.duration);
-        });
-        
-        audio.addEventListener('ended', () => {
-            playBtn.classList.remove('playing');
-            playerProgress.classList.remove('active');
-            lyricsPlayer.classList.remove('active');
-            progressBar.style.width = '0%';
-            currentTimeEl.textContent = '0:00';
-            currentLyricIndex = -1;
-        });
-        
-        // Credits Modal
-        const creditsLink = document.getElementById('creditsLink');
-        const creditsModal = document.getElementById('creditsModal');
-        const creditsModalClose = document.getElementById('creditsModalClose');
-        
-        creditsLink.addEventListener('click', () => {
-            creditsModal.classList.add('active');
-        });
-        
-        creditsModalClose.addEventListener('click', () => {
-            creditsModal.classList.remove('active');
-        });
-        
-        creditsModal.addEventListener('click', (e) => {
-            if (e.target === creditsModal) {
-                creditsModal.classList.remove('active');
-            }
-        });
-    </script>
+    }
+    return -1;
+}
+
+function updateLyrics(time) {
+    const newIndex = getCurrentLyricIndex(time);
+    
+    if (newIndex < 0) {
+        // Intro - show countdown
+        const timeToFirst = Math.ceil(lyricsData[0].time - time);
+        lyricsDisplay.textContent = '[ lyrics in ' + timeToFirst + 's... ]';
+        currentLyricIndex = -1;
+    } else if (newIndex !== currentLyricIndex) {
+        currentLyricIndex = newIndex;
+        lyricsDisplay.textContent = lyricsData[currentLyricIndex].text;
+    }
+}
+
+function toggleAudio() {
+    if (audio.paused) {
+        audio.play();
+        nowPlaying.style.display = 'block';
+    } else {
+        audio.pause();
+    }
+}
+
+audio.addEventListener('play', function() {
+    nowPlaying.style.display = 'block';
+});
+
+audio.addEventListener('timeupdate', function() {
+    currentTimeEl.textContent = formatTime(audio.currentTime);
+    if (audio.duration) {
+        totalTimeEl.textContent = formatTime(audio.duration);
+    }
+    updateLyrics(audio.currentTime);
+});
+
+audio.addEventListener('ended', function() {
+    nowPlaying.style.display = 'none';
+    currentLyricIndex = -1;
+    lyricsDisplay.textContent = '';
+});
+
+function showCredits() {
+    alert("With Love - Credits\n\nMixed by: Sean Kenney, Dad Mode Audio\nMastered by: Kevin Embleton\nDrums: Derek Swink\nBass Guitar: Derek Swink");
+}
+</script>
+
 </body>
 </html>
